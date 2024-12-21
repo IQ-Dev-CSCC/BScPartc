@@ -4,29 +4,24 @@ import { GeminiClient } from 'gemini-api-client'; // Replace with the actual imp
 // Initialize the Gemini API client
 const geminiClient = new GeminiClient({
     apiKey: process.env.GEMINI_API_KEY, // Ensure your API key is stored securely
-    // Add other necessary configuration options
 });
-
+console.log('Gemini API client initialized');
 // Function to transform text using the Gemini API
 async function geminiTextToText(input: string): Promise<string> {
     try {
-        // Prepare the request payload
         const requestPayload = {
             contents: [{ text: input }],
-            // Include any additional parameters required by the Gemini API
         };
+        console.log('Request payload:', requestPayload);
 
         // Make the API call to Gemini's text generation endpoint
         const response = await geminiClient.models.generateContent("gemini-1.5-flash", requestPayload);
 
-        console.log('Gemini API response:', response.data);
-
-        // Extract and return the transformed text from the response
-        const transformedText = response.data.candidates[0].content.text;
-        
-        console.log('Transformed text:', transformedText);
-
-        return transformedText;
+        if (response?.data?.candidates?.length > 0) {
+            return response.data.candidates[0].content.text || "No response generated.";
+        } else {
+            throw new Error("No candidates found in Gemini response.");
+        }
     } catch (error) {
         console.error('Error during Gemini text transformation:', error);
         throw new Error('Failed to transform text using Gemini API');
@@ -36,7 +31,8 @@ async function geminiTextToText(input: string): Promise<string> {
 // POST request handler
 export async function POST(request: NextRequest) {
     try {
-        const { inputText } = await request.json();
+        const body = await request.json();
+        const inputText = body?.inputText;
 
         if (!inputText) {
             return NextResponse.json({ error: 'Missing inputText in request body' }, { status: 400 });
@@ -61,7 +57,7 @@ export async function GET(request: NextRequest) {
         }
 
         const transformedText = await geminiTextToText(inputText);
-        return NextResponse.json({ transformedText });
+        return NextResponse.json({ transformedText }, { status: 200 });
     } catch (error) {
         console.error('Error in GET handler:', error);
         return NextResponse.json({ error: 'An internal server error occurred' }, { status: 500 });

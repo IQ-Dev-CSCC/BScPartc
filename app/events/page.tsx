@@ -10,10 +10,16 @@ const EventsPage = () => {
   const [selectedEvent, setSelectedEvent] = useState<string | null>(null)
 
   const events = [
-    { id: 1, title: "Boumerdes Summer Festival", date: "July 15-20, 2023", location: "Boumerdes Beach", coordinates: { lat: 36.7570, lng: 3.4781 } },
-    { id: 2, title: "Agricultural Fair", date: "September 5-7, 2023", location: "City Center", coordinates: { lat: 36.7667, lng: 3.4833 } },
-    { id: 3, title: "Coastal Cleanup Day", date: "October 1, 2023", location: "Various Beaches", coordinates: { lat: 36.7570, lng: 3.4781 } },
-    { id: 4, title: "Boumerdes Film Festival", date: "November 10-15, 2023", location: "Cultural Center", coordinates: { lat: 36.7623, lng: 3.4920 } },
+    { id: 1, title: "Boumerdès Tech Meetup 2024", date: "June 15, 2024", location: "University of Boumerdès", coordinates: { lat: 36.7570, lng: 3.4781 } },
+    { id: 2, title: "Green Energy Conference 2024", date: "April 10-12, 2024", location: "Boumerdès Cultural Center", coordinates: { lat: 36.7667, lng: 3.4833 } },
+    { id: 3, title: "NASA Space Apps Challenge", date: "October 5-6, 2024", location: "TechHub Boumerdès", coordinates: { lat: 36.7570, lng: 3.4781 } },
+    { id: 4, title: "Geoscience Day 2024", date: "March 20, 2024", location: "Boumerdès University Amphitheater", coordinates: { lat: 36.7623, lng: 3.4920 } },
+    { id: 5, title: "Boumerdès Startup Pitch Night", date: "May 22, 2024", location: "Boumerdès TechPark", coordinates: { lat: 36.7570, lng: 3.4781 } },
+    { id: 6, title: "Local Art Festival 2024", date: "August 1-3, 2024", location: "Boumerdès Cultural Center", coordinates: { lat: 36.7667, lng: 3.4833 } },
+    { id: 7, title: "Fitness and Health Expo", date: "July 12-14, 2024", location: "Boumerdès Sports Complex", coordinates: { lat: 36.7570, lng: 3.4781 } },
+    { id: 8, title: "Tech Women Leadership Forum", date: "September 15, 2024", location: "Boumerdès TechPark", coordinates: { lat: 36.7570, lng: 3.4781 } },
+    { id: 9, title: "Algerian Film Showcase 2024", date: "November 10, 2024", location: "Boumerdès Cultural Center", coordinates: { lat: 36.7667, lng: 3.4833 } },
+    { id: 10, title: "Boumerdès Career Fair 2024", date: "December 5-6, 2024", location: "Boumerdès Exhibition Hall", coordinates: { lat: 36.7570, lng: 3.4781 } },
   ]
 
   const openGoogleMaps = (lat: number, lng: number) => {
@@ -22,7 +28,7 @@ const EventsPage = () => {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-3xl font-bold">Events in Boumerdes</h1>
+      <h1 className="text-3xl font-bold text-[#ffffff]">Events in Boumerdes</h1>
       <div className="space-y-4">
         {events.map((event) => (
           <Card key={event.id}>

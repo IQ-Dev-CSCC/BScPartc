@@ -164,9 +164,9 @@ const DiscoverPage = () => {
           <div style={{ marginTop: '20px' }}>
             <h4>Legend</h4>
             <ul>
-              <li><img src="https://example.com/hotel-icon.png" alt="Hotel" style={{ width: '20px', height: '20px' }} /> Hotel</li>
-              <li><img src="https://example.com/museum-icon.png" alt="Museum" style={{ width: '20px', height: '20px' }} /> Museum</li>
-              <li><img src="https://example.com/park-icon.png" alt="Park" style={{ width: '20px', height: '20px' }} /> Park</li>
+              <li><img src={iconUrls.hotel} alt="Hotel" /> Hotel</li> 
+              <li><img src={iconUrls.museum} alt="Museum" /> Museum</li>
+              <li><img src={iconUrls.park} alt="Park" /> Park</li>
             </ul>
           </div>
         </CardContent>

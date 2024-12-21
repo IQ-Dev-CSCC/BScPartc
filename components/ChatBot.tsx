@@ -1,57 +1,52 @@
-"use client"
+"use client";
 
-import { useEffect, useState } from 'react'
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { ScrollArea } from "@/components/ui/scroll-area"
-import { MessageCircle, X } from 'lucide-react'
+import { useEffect, useState } from 'react';
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { MessageCircle, X } from 'lucide-react';
+import axios from 'axios';
 
 type Message = {
-  text: string
-  isUser: boolean
-}
+  text: string;
+  isUser: boolean;
+};
 
 export function ChatBot() {
-  const [isOpen, setIsOpen] = useState(false)
-  const [messages, setMessages] = useState<Message[]>([])
-  const [input, setInput] = useState('')
+  const [isOpen, setIsOpen] = useState(false);
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [input, setInput] = useState('');
 
   useEffect(() => {
     if (isOpen) {
       // Send the first message automatically
-      const initialMessage = "واش كاين في بومرداس من أحداث؟"
-      setMessages([{ text: initialMessage, isUser: false }])
-      handleSend(initialMessage)
+      const initialMessage = "واش كاين في بومرداس من أحداث؟";
+      setMessages([{ text: initialMessage, isUser: false }]);
+      handleSend(initialMessage);
     }
-  }, [isOpen])
+  }, [isOpen]);
 
   const handleSend = async (message: string) => {
     if (message.trim()) {
-      setMessages(prev => [...prev, { text: message, isUser: true }])
-      setInput('')
+      setMessages(prev => [...prev, { text: message, isUser: true }]);
+      setInput('');
 
       try {
-        const response = await fetch('/api/chat', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ inputText: message }),
-        })
+        const response = await axios.post('/api/test', { inputText: message });
 
-        const data = await response.json()
+        const data = response.data;
         if (data.transformedText) {
-          setMessages(prev => [...prev, { text: data.transformedText, isUser: false }])
+          setMessages(prev => [...prev, { text: data.transformedText, isUser: false }]);
         } else {
-          setMessages(prev => [...prev, { text: 'معليش، ما فهمتش. حاول مرة أخرى.', isUser: false }])
+          setMessages(prev => [...prev, { text: 'معليش، ما فهمتش. حاول مرة أخرى.', isUser: false }]);
         }
       } catch (error) {
-        console.error('Error sending message:', error)
-        setMessages(prev => [...prev, { text: 'معليش، صرات مشكلة. حاول مرة أخرى.', isUser: false }])
+        console.error('Error sending message:', error);
+        setMessages(prev => [...prev, { text: 'معليش، صرات مشكلة. حاول مرة أخرى.', isUser: false }]);
       }
     }
-  }
+  };
 
   return (
     <>
@@ -96,5 +91,5 @@ export function ChatBot() {
         </Card>
       )}
     </>
-  )
+  );
 }

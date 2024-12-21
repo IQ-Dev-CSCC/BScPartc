@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <div className="space-y-6">
       <section className="text-center py-12">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Boumerdes Explorer</h1>
+        <h1 className="text-4xl font-bold mb-4 text-[#fff]">Welcome to Boumerdes Explorer</h1>
         <p className="text-xl text-muted-foreground mb-8">Discover, Experience, and Invest in the Heart of Algeria</p>
         <Button asChild size="lg">
           <Link href="/discover">Start Exploring</Link>
@@ -81,7 +81,7 @@ export default function Home() {
       </section>
 
       <section className="text-center py-12">
-        <h2 className="text-3xl font-bold mb-4">About Boumerdes Explorer</h2>
+        <h2 className="text-3xl font-bold mb-4 text-[#ffffff]">About Boumerdes Explorer</h2>
         <p className="text-lg text-muted-foreground mb-4">
           Boumerdes Explorer is your comprehensive guide to experiencing the best of Boumerdes, Algeria. 
           Whether you're a tourist looking to explore the city's beautiful coastline and rich culture, 
